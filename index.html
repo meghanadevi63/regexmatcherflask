@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Regex Matcher</title>
+    <style>
+        body {
+    font-family: Arial, sans-serif;
+    background-color: #e0f7fa; /* Light blue background */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    margin: 0;
+    }
+
+    .container {
+        background-color: white;
+        padding: 30px;
+        border-radius: 12px;
+        box-shadow: 0px 6px 15px rgba(0, 0, 0, 0.2);
+        text-align: center;
+        width: 400px;
+        max-width: 90%; /* To avoid collision with screen edges on smaller screens */
+    }
+
+    h1 {
+        margin-bottom: 20px;
+        font-size: 24px;
+        color: #00796b; /* Dark teal color */
+    }
+
+    label {
+        font-weight: bold;
+        color: #004d40; /* Teal color for labels */
+    }
+
+    textarea, input[type="text"] {
+        width: 95%; /* Adjust width to prevent collision */
+        max-width: 100%; /* Ensure it doesn't overflow */
+        padding: 10px;
+        margin: 10px 0;
+        border: 1px solid #ccc;
+        border-radius: 5px;
+    }
+
+    input[type="submit"], button {
+        padding: 10px 20px;
+        background-color: blue;
+        color: white;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+    }
+
+    input[type="submit"]:hover, button:hover {
+        background-color: #45a049;
+    }
+
+    .message {
+        color: red;
+        margin-top: 15px;
+    }
+
+    .back-button {
+        margin-top: 20px;
+    }
+
+    .email-link {
+        margin-top: 15px;
+        background-color: #00796b; /* Teal background for the button */
+        color: white;
+        padding: 10px 20px;
+        border-radius: 5px;
+        text-decoration: none;
+        display: inline-block;
+    }
+
+    .email-link:hover {
+        background-color: #004d40; /* Darker teal on hover */
+    }
+
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Regex Matcher</h1>
+        <form action="/results" method="post">
+            <label for="test_string">Test String:</label><br>
+            <textarea id="test_string" name="test_string" rows="4" cols="50">{{ test_string }}</textarea><br><br>
+            <label for="regex">Regex Pattern:</label><br>
+            <input type="text" id="regex" name="regex" value="{{ regex }}"><br><br>
+            <input type="submit" value="Match">
+        </form>
+
+        {% if matches is not none %}
+            <h2>Matches:</h2>
+            <ul>
+            {% for match in matches %}
+                <li>{{ match }}</li>
+            {% endfor %}
+            </ul>
+        {% endif %}
+
+        {% if message %}
+            <p class="message">{{ message }}</p>
+        {% endif %}
+
+        {% if error %}
+            <p class="message">{{ error }}</p>
+        {% endif %}
+
+        <br>
+        <a href="/email"><button type="button">Email</button></a>
+    </div>
+</body>
+</html>
